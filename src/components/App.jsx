@@ -19,7 +19,7 @@ export default function App () {
     alert (`${text.name} is already in contacts.`);
     return;
   }
-  setContacts([...contacts, text]);
+  setContacts([text, ...contacts]);
  } ;
 
 const deleteContact = contactId =>{
