@@ -5,9 +5,11 @@ import { Filter } from "./Filter/Filter";
 
 export default function App () {
 
-  const [contacts, setContacts] = useState(``)
-  const [filter, setFilter] = useState(()=>{return JSON.parse(localStorage.getItem(`contacts`))??[]})
-  
+  const [filter, setFilter] = useState('');
+  const [contacts, setContacts] = useState(() => {
+    return JSON.parse(localStorage.getItem('contacts')) ?? [];
+  });
+
   useEffect(() => {
     localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
@@ -30,9 +32,8 @@ const changeFilter = e => {
 };
 
 const getVisibleContacts = () => {
-  
-const NormolisedFilter = filter.toLowerCase()
-  return contacts.filter(contact => contact.name.toLowerCase().includes(NormolisedFilter))
+  const NormolisedFilter = filter.toLowerCase();
+  return contacts.filter((contact => contact.name.toLowerCase().includes(NormolisedFilter)))
 };
 
   return (
@@ -50,7 +51,7 @@ const NormolisedFilter = filter.toLowerCase()
       <ContactForm  addContact={addContact}/>
       {contacts.length>0 ? <h2>Contacts</h2> : <h2>There are no contacts</h2>}
       {contacts.length>0 &&  <Filter value = {filter} onChange = {changeFilter}/>}
-      <ContactList getVisibleContacts={getVisibleContacts()} deleteContact={deleteContact} />
+      <ContactList getVisibleContacts={getVisibleContacts} deleteContact={deleteContact} />
     </div>
   );
     };
